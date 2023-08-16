@@ -42,11 +42,11 @@ const property =[
   metros: 500
 }
 ]
-const products = (rooms = 0, mfrom = 0, mto = 0) => {
+const products = (rooms = null, mfrom = null, mto = null) => {
 	let html = ""
 	count = 0;
 	for (let product of property) {
-		if(rooms === 0 && mfrom === 0 && mto === 0){
+		if(rooms === null && mfrom === null && mto === null){
 			count++;
 			html += `
 			<div class="card">
@@ -86,7 +86,7 @@ const formFrom = document.querySelector("#from")
 const formTo = document.querySelector("#to")
 const formRooms = document.querySelector("#rooms")
 btnSearch.addEventListener("click" , () =>{
-	if(formRooms.value != "" && formTo.value != "" && formFrom.value != ""){
+	if(formRooms.value != '' && formTo.value != '' && formFrom.value != ''){
 		products(formRooms.value, formFrom.value , formTo.value)
 	}else {
 		alert("Faltan campos por llenar")
