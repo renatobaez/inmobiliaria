@@ -1,4 +1,4 @@
-const property =[
+const data =[
 {
 	nombre: "Casa de campo",
 	descripcion: "Un lugar ideal para descansar de la ciudad",
@@ -42,10 +42,19 @@ const property =[
   metros: 500
 }
 ]
-const products = (rooms = null, mfrom = null, mto = null) => {
+/* ELEMENTOS BUSQUEDA */
+const btnSearch = document.querySelector("#btnSearch")
+const formFrom = document.querySelector("#from")
+const formTo = document.querySelector("#to")
+const formRooms = document.querySelector("#rooms")
+/* ELEMENTOS RESULTADO */
+const titleProducts = document.querySelector(".title-products")
+const property = document.querySelector(".products")
+
+const getProducts = (rooms = null, mfrom = null, mto = null) => {
 	let html = ""
-	count = 0;
-	for (let product of property) {
+	let count = 0;
+	for (let product of data) {
 		if(rooms === null && mfrom === null && mto === null){
 			count++;
 			html += `
@@ -74,23 +83,15 @@ const products = (rooms = null, mfrom = null, mto = null) => {
 				</div>`
 		}
 	}
-	const titleProducts = document.querySelector(".title-products")
 	titleProducts.innerHTML = `Total: ${count}`
-
-	const d = document.querySelector(".products")
-	d.innerHTML = html
-	
+	property.innerHTML = html
 }
-const btnSearch = document.querySelector("#btnSearch")
-const formFrom = document.querySelector("#from")
-const formTo = document.querySelector("#to")
-const formRooms = document.querySelector("#rooms")
 btnSearch.addEventListener("click" , () =>{
 	if(formRooms.value != '' && formTo.value != '' && formFrom.value != ''){
-		products(formRooms.value, formFrom.value , formTo.value)
+		getProducts(formRooms.value, formFrom.value , formTo.value)
 	}else {
 		alert("Faltan campos por llenar")
-		products()
+		getProducts()
 	}
 })
-products()
+getProducts()

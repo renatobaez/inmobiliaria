@@ -6,19 +6,21 @@
 	box-sizing: border-box;
 	text-decoration: none;
 }
+
 body {
 	font-family: Verdana, Geneva, Tahoma, sans-serif;
 	background-color: dimgray;
 }
+
 main {
-	
 	display: grid;
 	grid-template-columns: 270px 80%;
-	grid-template-areas: "search property";
+	grid-template-areas: "nav section";
 	color: white;
 }
-#search {
-	grid-area: search;
+/* MENU */
+nav {
+	grid-area: nav;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -27,7 +29,7 @@ main {
 	width: 270px;
 	height: 100vh;
 }
-.metros {
+.size {
 	margin-left: 30px;
 	display: flex;
 	gap: 20px;
@@ -37,7 +39,7 @@ main {
 	flex-direction: column;
 	align-items: center;
 }
-#search button {
+nav button {
 	background-color: rgba(241, 199, 14, 0.822);
 	width: 80px;
 	height: 40px;
@@ -52,8 +54,9 @@ input {
   margin: 8px 0;
   box-sizing: border-box;
 }
-#property {
-	grid-area: property;
+/* PRODUCTOS */ 
+section {
+	grid-area: section;
 	margin-top: 20px;
 	text-align: center;
 }
@@ -111,10 +114,10 @@ input {
 		grid-template-columns: 100%;
 		grid-template-rows: 1fr 9fr;
 		grid-template-areas:
-		"search"
-		"property";
+		"nav"
+		"section";
 	}
-	#search {
+	nav {
 		width: 200px;
 		height: 200px;
 		border:none;
