@@ -1,45 +1,45 @@
 const data =[
 {
-	nombre: "Casa de campo",
-	descripcion: "Un lugar ideal para descansar de la ciudad",
+	name: "Casa de campo",
+	description: "Un lugar ideal para descansar de la ciudad",
 	src: "./assets/img/01.jpg",
-	cuartos: 2,
-	metros: 170
+	rooms: 2,
+	meters: 170
 },
 {
-	nombre: "Casa de playa",
-  descripcion: "Despierta tus días oyendo el oceano",
+	name: "Casa de playa",
+  description: "Despierta tus días oyendo el oceano",
   src: "./assets/img/06.jpg",
-  cuartos: 2,
-  metros: 130
+  rooms: 2,
+  meters: 130
 },
 {
-	nombre: "Casa en el centro",
-  descripcion: "Ten cerca de ti todo lo que necesitas",
+	name: "Casa en el centro",
+  description: "Ten cerca de ti todo lo que necesitas",
   src: "./assets/img/03.jpg",
-  cuartos: 1,
-  metros: 80
+  rooms: 1,
+  meters: 80
 },
 {
-	nombre: "Casa rodante",
-  descripcion: "Conviertete en un nómada del mundo sin salir de tu casa",
+	name: "Casa rodante",
+  description: "Conviertete en un nómada del mundo sin salir de tu casa",
   src: "./assets/img/05.jpg",
-  cuartos: 1,
-  metros: 6
+  rooms: 1,
+  meters: 6
 },
 {
-	nombre: "Departamento",
-  descripcion: "Desde las alturas todo se ve mejor",
+	name: "Departamento",
+  description: "Desde las alturas todo se ve mejor",
   src: "./assets/img/02.jpg",
-  cuartos: 3,
-  metros: 200
+  rooms: 3,
+  meters: 200
 },
 {
-	nombre: "Mansión",
-  descripcion: "Vive una vida lujosa en la mansión de tus sueños",
+	name: "Mansión",
+  description: "Vive una vida lujosa en la mansión de tus sueños",
   src: "./assets/img/04.jpg",
-  cuartos: 5,
-  metros: 500
+  rooms: 5,
+  meters: 500
 }
 ]
 /* ELEMENTOS BUSQUEDA */
@@ -49,7 +49,21 @@ const formTo = document.querySelector("#to")
 const formRooms = document.querySelector("#rooms")
 /* ELEMENTOS RESULTADO */
 const titleProducts = document.querySelector(".title-products")
-const property = document.querySelector(".products")
+const products = document.querySelector(".products")
+
+const template = (name, description, src, rooms, meters) => {
+	return (`
+			<div class="card">
+				<img class="card-img-top" src="${src}" alt="${name}">
+				<div class="card-title">${name}</div>
+				<ul class="card-details">
+					<li>Cuartos: ${rooms}</li>
+					<li>Metros: ${meters}</li>
+				</ul>
+				<div class="card-text">${description}</div>
+				<button>Ver más</button>
+			</div>`)
+}
 
 const getProducts = (rooms = null, mfrom = null, mto = null) => {
 	let html = ""
@@ -57,34 +71,14 @@ const getProducts = (rooms = null, mfrom = null, mto = null) => {
 	for (let product of data) {
 		if(rooms === null && mfrom === null && mto === null){
 			count++;
-			html += `
-			<div class="card">
-				<img class="card-img-top" src="${product.src}" alt="${product.nombre}">
-				<div class="card-title">${product.nombre}</div>
-				<ul class="card-details">
-					<li>Cuartos: ${product.cuartos}</li>
-					<li>Metros: ${product.metros}</li>
-				</ul>
-				<div class="card-text">${product.descripcion}</div>
-				<button>Ver más</button>
-			</div>`
-		}else if(product.cuartos >= rooms && product.metros >= mfrom && product.metros <= mto){
+			html += template(product.name, product.description, product.src, product.rooms, product.meters)
+		}else if(product.rooms >= rooms && product.meters >= mfrom && product.meters <= mto){
 			count++;
-			html += `
-				<div class="card">
-					<img class="card-img-top" src="${product.src}" alt="${product.nombre}">
-					<div class="card-title">${product.nombre}</div>
-					<ul class="card-details">
-						<li>Cuartos: ${product.cuartos}</li>
-						<li>Metros: ${product.metros}</li>
-					</ul>
-					<div class="card-text">${product.descripcion}</div>
-					<button>Ver más</button>
-				</div>`
+			html += template(product.name, product.description, product.src, product.rooms, product.meters)
 		}
 	}
 	titleProducts.innerHTML = `Total: ${count}`
-	property.innerHTML = html
+	products.innerHTML = html
 }
 btnSearch.addEventListener("click" , () =>{
 	if(formRooms.value != '' && formTo.value != '' && formFrom.value != ''){
