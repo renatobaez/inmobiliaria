@@ -51,16 +51,16 @@ const formRooms = document.querySelector("#rooms")
 const titleProducts = document.querySelector(".title-products")
 const products = document.querySelector(".products")
 
-const template = (name, description, src, rooms, meters) => {
+const template = (product) => {
 	return (`
 			<div class="card">
-				<img class="card-img-top" src="${src}" alt="${name}">
-				<div class="card-title">${name}</div>
+				<img class="card-img-top" src="${product.src}" alt="${product.name}">
+				<div class="card-title">${product.name}</div>
 				<ul class="card-details">
-					<li>Cuartos: ${rooms}</li>
-					<li>Metros: ${meters}</li>
+					<li>Cuartos: ${product.rooms}</li>
+					<li>Metros: ${product.meters}</li>
 				</ul>
-				<div class="card-text">${description}</div>
+				<div class="card-text">${product.description}</div>
 				<button>Ver más</button>
 			</div>`)
 }
@@ -71,10 +71,10 @@ const getProducts = (rooms = null, mfrom = null, mto = null) => {
 	for (let product of data) {
 		if(rooms === null && mfrom === null && mto === null){
 			count++;
-			html += template(product.name, product.description, product.src, product.rooms, product.meters)
+			html += template(product)
 		}else if(product.rooms >= rooms && product.meters >= mfrom && product.meters <= mto){
 			count++;
-			html += template(product.name, product.description, product.src, product.rooms, product.meters)
+			html += template(product)
 		}
 	}
 	titleProducts.innerHTML = `Total: ${count}`
